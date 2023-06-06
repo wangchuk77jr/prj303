@@ -1,0 +1,55 @@
+.contact {
+    position: relative;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    padding-top: 100px;
+    padding-bottom: 10px;
+    min-height: 70vh;
+    background-image: url('https://images.pexels.com/photos/2440061/pexels-photo-2440061.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    
+}
+
+.contact::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(242, 255, 0, 0.7);
+    
+}
+.contact-subheading{
+    font-weight: 900;
+}
+.contact-card{
+    z-index: 2;
+    background-color: rgba(246, 241, 241, 0.294);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(132, 132, 4, 0.645);
+    transition: all 3s ease-in-out;
+    
+}
+.contact-card:hover{
+    background-color: rgb(246, 244, 242);
+}
+.contact-card h6 a{
+    text-decoration: none;
+    color: #000;
+}
+
+@media(max-width:700px) {
+    .contact{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}

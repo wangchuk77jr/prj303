@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Emovibe Music | Drop Music</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="icon" href="../static/Image/logoTitle.png" type="image">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
+
+  {% block style %} {% endblock %}
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    :root{
+        --primary-color :#fefe03;
+        --secondary-color:#00F6FF;
+        --helper-color:#FF4F5A;
+        --text-color:#00000;
+    }
+    html{
+    scroll-behavior: smooth;
+    }
+    body{
+        font-family: 'Poppins', sans-serif;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        background-color: #eaeaf8;
+    }
+    .nav-link{
+      text-decoration: none;
+      color: #000;
+      transition: all ease-in-out 0.1s;
+    }
+    .nav-link:hover,.nav-link:active{
+      color: #FF4F5A;
+      border-bottom: 2px solid #FF4F5A;
+    }
+    #sidebar{
+      background-color:#f9f960;
+    }
+    @media (max-width: 767.98px) {
+      .sidebar {
+        display: none;
+      }
+      .navbar-brand {
+        margin-left: 10px;
+      }
+      .navbar-toggler {
+        margin-right: 10px;
+      }
+      .sidebar-sticky {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      .navbar-collapse {
+        padding-left: 15px;
+        padding-right: 15px;
+        border-top: 1px solid #96949452;
+        border-bottom: 1px solid #96949452;
+      }
+      .navbar-nav .nav-item {
+        margin-bottom: 10px;
+      }
+      .navbar-nav .nav-link {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #96949452;
+        border-radius: 0;
+      }
+      .navbar-nav .nav-link:last-child {
+        border-bottom: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar d-lg-none navbar-expand-md navbar-light  sticky-top" style="background-color: #f9f960;">
+    <a class="navbar-brand" href="#">
+      <img src="../static/Image/logo.png" width="100" height="62" class="d-inline-block align-top logo" alt="Placeholder logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'userdashboard'%}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'uploadMusic'%}">Upload Music</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'myMusic'%}">My Music</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'profile_setting'%}">Profile Settings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="openLogoutModal(event)">Log Out</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2 d-none d-lg-block pt-3 sidebar vh-100 position-sticky sticky-top top-0" id="sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link " href="#">
+                <img src="../static/Image/logo.png" width="100" height="62" class="d-inline-block align-top logo" alt="Placeholder logo">
+              </a>
+            </li>
+            <li class="nav-item" style="border-bottom: 1px solid #96949452;">
+              <a class="nav-link" href="{% url 'userdashboard'%}">
+                <span data-feather="home"></span>
+                Home
+              </a>
+            </li>
+            <li class="nav-item" style="border-bottom: 1px solid #96949452;">
+              <a class="nav-link" href="{% url 'uploadMusic'%}">
+                <span data-feather="user"></span>
+                Upload Music
+              </a>
+            </li>
+            <li class="nav-item" style="border-bottom: 1px solid #96949452;">
+              <a class="nav-link" href="{% url 'myMusic'%}">
+                <span data-feather="music"></span>
+                My Music
+              </a>
+            </li>
+          </ul>
+
+          <div class="profile">
+            <ul class="nav flex-column mb-2">
+              <li class="nav-item" style="border-bottom: 1px solid #96949452;">
+                <a class="nav-link" href="{% url 'profile_setting'%}">
+                  <span data-feather="settings"></span>
+                  Profile Settings
+                </a>
+              </li>
+              <!-- Logout -->
+              <li class="nav-item" style="border-bottom: 1px solid #96949452;">
+                <a class="nav-link" href="#" onclick="openLogoutModal(event)">
+                  <span data-feather="log-out"></span>
+                  Log Out
+                </a>
+              </li>
+              <script>
+                function openLogoutModal(event) {
+                  event.preventDefault();  // Prevent the default link behavior
+
+                  Swal.fire({
+                    title: 'Logout Confirmation',
+                    text: 'Are you sure you want to log out?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'Cancel',
+                    reverseButtons: true,
+                    confirmButtonColor: '#000',
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      // Perform logout action
+                      // Make an AJAX request to the logout URL
+                      fetch('/logout/', {
+                        method: 'POST',
+                        headers: {
+                          'X-CSRFToken': '{{ csrf_token }}',  // Include the CSRF token
+                        },
+                      })
+                      .then(response => {
+                        if (response.ok) {
+                          // Logout was successful
+                          Swal.fire('Logged Out!', 'You have been successfully logged out.', 'success');
+                          window.location.href = 'login';  // Redirect to the login URL
+                        } else {
+                          // Logout failed
+                          Swal.fire('Error', 'An error occurred during logout.', 'error');
+                        }
+                      });
+                    }
+                  });
+                }
+              </script>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <main role="main" class="col-lg-9 ml-sm-auto col-lg-10 px-4">
+        {% block main %}
+
+        {% endblock %}
+      </main>
+    </div>
+  </div>
+</body>
+</html>

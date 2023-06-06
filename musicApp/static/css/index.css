@@ -1,0 +1,221 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root{
+    --primary-color :#fefe03;
+    --secondary-color:#00F6FF;
+    --helper-color:#FF4F5A;
+    --text-color:#00000;
+}
+html{
+  scroll-behavior: smooth;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.navbar{
+    background-color: var(--primary-color);
+    z-index: 999;
+}
+nav li a {
+  position: relative;
+  text-decoration: none;
+  color: #000;
+}
+
+nav li a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  width: 0;
+  height: 2px;
+  background-color: #1f1e1e92;
+  transition: width 0.2s ease-in-out;
+}
+
+nav li.active a::after,
+nav li a:hover::after {
+  width: 85%;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    
+  }
+  
+  .search__input {
+    background-color: #f4f2f2;
+    border: 1 px solid #385A64;
+    height: 40px;
+    color: #101010;
+    padding: 0.7rem 1rem;
+    border-radius: 30px;
+    transition: all ease-in-out .5s;
+    margin-right: -2.5rem;
+  }
+  
+  .search__input:hover, .search__input:focus {
+    box-shadow: 0 0 1em #23e93a13;
+  }
+  
+  .search__input:focus {
+    outline: none;
+    background-color: #f0eeee;
+  }
+  
+  
+  .search__input:focus + .search__button {
+    background-color: #f0eeee;
+  }
+  
+  .search__button {
+    border: none;
+    background-color: #f4f2f2;
+  }
+  
+  .search__button:hover {
+    cursor: pointer;
+  }
+  
+  .search__icon {
+    height: 1.3em;
+    width: 1.3em;
+    fill: #0e0d0d;
+  }
+  .loign-btn:hover{
+    background-color: rgb(6, 6, 6) !important;
+  }
+/* footer */
+.footer {
+    --mask: radial-gradient(9px at top,#e6670500 97%,#000) 50% / 16.65px 100%;
+    -webkit-mask: var(--mask);
+            mask: var(--mask);
+    position: relative;
+    background-color: rgb(240, 240, 21);
+    min-height: 100vh;
+  }
+  
+  .footer::before {
+    content: '';
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(../Image/feedback-1.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.2; 
+    z-index: -1;
+  }
+  
+.footer h6{
+    font-weight: 900 !important;
+    font-size: 20px !important;
+    color: #353434 !important;
+}
+.footer ul{
+    list-style: none;
+}
+.footer a{
+    color: #000;
+    text-decoration: none;
+    font-size: 14px;
+
+}
+.f-credits p{
+    text-align: center;
+    color: #adadad;
+
+}
+footer a:hover,
+footer a:active{
+    color: rgb(255, 64, 0);
+}
+#go-to-top {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: #333333;
+  border-radius: 50%;
+  text-align: center;
+  transition: all 0.1s ease-in-out;
+}
+
+#go-to-top:hover {
+  background-color:  rgb(251, 255, 0);
+  color: #000;
+}
+
+/* search music */
+select[name="category"] {
+  background-color: #fff;
+}
+
+option:hover {
+  background-color: rgb(255, 208, 0);
+}
+
+.music-section{
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: start;
+}
+.music-card {
+  width: 290px;
+  transition: all linear 0.3s;
+}
+.music-card:hover{
+  transform: translateY(-5px);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.music-card .card-img-top {
+  max-height: 150px;
+  object-fit: cover;
+}
+.music-body{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  border: none;
+  background-color: rgb(249, 249, 223);
+}
+/* Customize the scrollbar track */
+::-webkit-scrollbar {
+  width: 15px; /* width of the scrollbar */
+}
+
+/* Customize the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #101010; /* color of the thumb */
+  border-radius: 10px; /* roundness of the thumb */
+}
+
+/* Customize the scrollbar track on hover */
+::-webkit-scrollbar-track{
+  background-color: #effb00;
+  border: 2px solid #00000012;
+  border-radius: 10px;
+}
+@media (max-width:700px) {
+  .music-card{
+    width: 500px;
+  }
+  
+}

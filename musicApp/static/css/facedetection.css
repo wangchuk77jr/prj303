@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+body{
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+.face-dection-left{
+    position: relative;
+    background-image: url('https://images.pexels.com/photos/2240000/pexels-photo-2240000.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    width: 100%;
+    --mask:
+    radial-gradient(67.08px at calc(100% - 90.00px) 50%,#000 99%,#0000 101%) 0 calc(50% - 60px)/100% 120px,
+    radial-gradient(67.08px at calc(100% + 60.00px) 50%,#0000 99%,#000 101%) calc(100% - 30px) 50%/100% 120px repeat-y;
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+}
+.face-dection-left::before{
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #e0cc15a5;
+  z-index: -1;
+}
+.title{
+    font-weight: 900;
+}
+.form{
+    min-width: 400px;
+}
+
+.drop-container {
+    background-color: #ffffffe4;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-top: 1rem;
+    border-radius: 10px;
+    border: 2px dashed rgb(28, 27, 26);
+    color: #2f2e2e80;
+    cursor: pointer;
+    transition: all .2s ease-in-out, border .2s ease-in-out;
+  }
+  
+  .drop-container:hover {
+    background: rgb(114, 112, 108);
+    border-color:rgb(9, 9, 9);
+  }
+  
+  .drop-container:hover .drop-title {
+    color: #222;
+  }
+  
+  .drop-title {
+    color: #2f2e2e80;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    transition: color .2s ease-in-out;
+  }
+  
+  #file-input {
+    width: 350px;
+    max-width: 100%;
+    color: #2f2e2e80;
+    padding: 2px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid rgba(8, 8, 8, 0.288);
+  }
+  
+  #file-input::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: #161615ac;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+  }
+  
+  #file-input::file-selector-button:hover {
+    background: #1a1919;;
+  }
+
+  .submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 50px;
+    outline: 0;
+    font-size: 18px;
+    background: rgba(12, 12, 12, 0.909);
+    color: #fff;
+  }
+  svg {
+    margin: 0 0 0 10px;
+  }
+  .submit-btn:hover svg {
+    margin: 0 0 0 25px;
+    transition: 0.3s;
+  }
+  .submit-btn:hover{
+    border: 2px solid yellow;
+  }
+  .submit-btn:not(:hover) svg {
+    transition: 0.3s;
+  }
+
+  .submit-btn:not(:active) {
+    transition: 200ms;
+  }
+
+  /* Scanning animation */
+@keyframes scanning {
+  0% {
+    height: 0%;
+  }
+  20% {
+    height: 20%;
+    background-color: rgb(83, 84, 83);
+  }
+  40% {
+    height: 40%;
+    background-color: rgb(13, 13, 13);
+  }
+  60% {
+    height: 60%;
+    background-color: rgb(83, 84, 83);
+  }
+  80% { 
+    height: 80%;
+    background-color: rgb(13, 13, 13);
+  }
+  100% {
+    height: 100%;
+    background-color: rgb(83, 84, 83);
+  }
+}
+
+#scanner {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #eee;
+  animation: scanning 0.7s ease-in-out both;
+  animation-iteration-count: 3;
+}
+
+.button-detect-again{
+  display: block;
+  text-decoration: none;
+  width: 100%;
+  border: 2px solid rgba(9, 9, 9, 0.821);
+  text-align: center;
+  margin-top: 50px;
+  padding: 10px 0px;
+  color: #000;
+  font-size: 19px;
+  text-transform: capitalize;
+  transition: all ease 0.3s;
+  
+}
+.button-detect-again:hover{
+  background-color: rgba(9, 9, 9, 0.821);
+  color: #ffffffe1;
+  font-weight: 400;
+}
+.button-Msearch{
+  display: block;
+  text-decoration: none;
+  width: 100%;
+  background-color: rgba(9, 9, 9, 0.821);
+  text-align: center;
+  margin-top: 15px;
+  padding: 7px 0px;
+  text-transform: capitalize;
+  color: #fff;
+  font-weight: 400;
+  font-size: 20px;
+  transition: all ease 0.3s;
+}
+.button-Msearch:hover{
+  color: #ffffffe1;
+  background-color: rgb(132, 132, 4);
+}
+@media (max-width:780px) {
+  .face-dection-left{
+    display: none;
+  }
+}
+/* Customize the scrollbar track */
+::-webkit-scrollbar {
+  width: 15px; /* width of the scrollbar */
+}
+
+/* Customize the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #101010; /* color of the thumb */
+  border-radius: 10px; /* roundness of the thumb */
+}
+
+/* Customize the scrollbar track on hover */
+::-webkit-scrollbar-track{
+  background-color: #effb00;
+  border: 2px solid #00000012;
+  border-radius: 10px;
+}

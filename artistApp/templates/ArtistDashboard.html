@@ -1,0 +1,131 @@
+{% extends 'artistbase.html'%}
+{% block style %}
+<link rel="stylesheet" href="../static/css/ArtistHome.css">
+{% endblock %}
+
+{% block main %}
+<div class="pt-3 pb-2 mb-3" style="border-bottom: 2px dotted #383736;display: flex;justify-content: space-between;">
+   <div>
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success">
+          <h6> {{ message }}</h6>
+        </div>
+        {% endfor %}
+    {% else %}
+    <h4 class="text-uppercase" style="font-weight: 500;color:#010101;">Welcome Back {{username}}! <span class="pl-1" style="font-size: 30px;"> 👋</span> </h4>
+    {% endif %}
+   </div>
+   <div>
+<!-- Button to trigger the custom alert -->
+<button class="btn btn-outline-warning p-0" style="border-radius: 100px; width: 50px; height: 50px;" data-toggle="modal" data-target="#profilePictureAlert">
+   <img class="p-0 m-0" src="{{ profile.profile_picture.url }}" alt="Profile Picture" style="width: 100%; height: 100%; object-fit: cover; object-position: center; border-radius: 100px;">
+ </button>
+ 
+ <!-- Custom alert -->
+ <div class="modal fade" id="profilePictureAlert" tabindex="-1" role="dialog" aria-labelledby="profilePictureAlertLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="profilePictureAlertLabel">Choose Profile Picture</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <form method="post" enctype="multipart/form-data">
+         <div class="modal-body">
+           {% csrf_token %}
+           <div class="form-group">
+             <label for="profile_picture">Select Image:</label>
+             <input required type="file" accept="image/*"  class="form-control-file" id="profile_picture" name="profile_picture">
+           </div>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
+           <button type="submit" class="btn btn-dark">Upload</button>
+         </div>
+       </form>
+     </div>
+   </div>
+ </div>
+ 
+   </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="mb-3 mt-2" style="font-weight: 900;font-size: 30px; color: #010101b3;">Music Overview</h1>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="music-home-card">
+           <h1 class="text-center">{{total_music}}</h1>
+           <h6>Total Music</h6>
+        </div>
+      </div>
+      <div class="col-md-3">
+         <div class="music-home-card">
+            <h1>{{happy_count}}</h1>
+           <h6>Happy Music</h6>
+        </div>
+      </div>
+      <div class="col-md-3">
+         <div class="music-home-card">
+            <h1>{{sad_count}}</h1>
+           <h6>Sad Music</h6>
+        </div>
+      </div>
+      <div class="col-md-3">
+         <div class="music-home-card">
+            <h1>{{surprise_count}}</h1>
+           <h6>Surprise Music</h6>
+        </div>
+      </div>
+      </div>
+      <div class="row mt-4">
+      <div class="col-md-3">
+         <div class="music-home-card">
+            <h1>{{disgust_count}}</h1>
+           <h6>Disgust Music</h6>
+        </div>
+      </div>
+      <div class="col-md-3">
+         <div class="music-home-card">
+            <h1>{{fear_count}}</h1>
+           <h6>Fear Music</h6>
+        </div>
+      </div>
+      <div class="col-md-3">
+         <div class="music-home-card">
+            <h1>{{angry_count}}</h1>
+           <h6>Angry Music</h6>
+        </div>
+      </div>
+      <div class="col-md-3">
+         <div class="music-home-card">
+            <h1>{{neutral_count}}</h1>
+           <h6>Neutral Music</h6>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="row mt-4">
+  <div class="col-md-12">
+    <div class="row mb-4">
+      <div class="col-md-6">
+         <!-- Display the chart image -->
+         <div style="background-color: #fff;">
+            <img src="../../media/emotions_chart.png" alt="Music Overview Chart" style="width: 100%;">
+         </div>
+      </div>
+      <div class="col-md-6">
+         <div style="background-color: #fff;">
+            <img src="../static/images/Playlist-amico.png" alt="Music" style="width: 100%;height: 419px;object-fit:contain;object-position: center;">
+         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock%}

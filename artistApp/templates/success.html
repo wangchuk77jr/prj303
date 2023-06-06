@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Emovibe Music | Verified</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="icon" href="../static/Image/logoTitle.png"  type="image">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    :root{
+        --primary-color :#fefe03;
+        --secondary-color:#00F6FF;
+        --helper-color:#FF4F5A;
+        --text-color:#00000;
+    }
+    html{
+    scroll-behavior: smooth;
+    position: relative;
+    }
+    body{
+        font-family: 'Poppins', sans-serif;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100vh;
+        background-image: url('https://img.freepik.com/free-vector/gradient-fluid-abstract-background_52683-60951.jpg?w=1380&t=st=1682248233~exp=1682248833~hmac=394731e685a6cdea4a9884c93da8c2e600366c0ebb9f48bb547fe8990604b58f');
+        background-repeat:no-repeat;
+        background-size: cover;
+        position: relative;
+        z-index: 2;
+    }
+    html::after{
+        content: '';
+        width: 100%;
+        height: 100%;
+        background-color: #fefe03a1;
+        position: absolute;
+        top:0;
+        padding: 0;
+        margin: 0;
+    }
+
+    
+    .input-group-text {
+      cursor: pointer;
+    }
+    .card-header{
+        font-weight: 900;
+    }
+  </style>
+</head>
+<body>
+  <div class="container pt-2">
+    <a href="{% url 'home'%}">
+      <img src="../static/images/logo.png" width="120" height="80" class="d-inline-block align-top logo" alt="logo">
+    </a>  
+  </div>
+  <div class="container" id="loginForm">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card ">
+          <div class="card-header bg-success text-white">
+            <h5>Congratulations! Your email has been successfully verified.</h5>
+          </div>
+          <div class="card-body text-center">
+            <img src="../static/images/Verified.png" alt="email-verification" style="width: 100%; height: 300px;object-fit: contain; object-position: center;">
+            <h6>Please Login Into Your Account!</h6>
+          </div>
+          <div class="text-center mb-5">
+          <a class="btn btn-dark px-5" href="login">Login</a>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

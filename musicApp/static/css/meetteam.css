@@ -1,0 +1,95 @@
+.ourteam{
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+div.overflow-auto::-webkit-scrollbar {
+    display: none;
+  } 
+.card {
+    width: 100%;
+    height: 300px;
+    background: rgb(240, 240, 21);
+    padding: 2rem 1.5rem;
+    transition: box-shadow .3s ease, transform .2s ease;
+   }
+.card-profile{
+    --size : 140px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background-color: #f5f6f1;
+}
+.card-profile img{
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.card-body{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: start;
+    margin-top: 10px;
+}
+.name{
+    padding: 0;
+    margin: 0;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+.job{
+    padding-top: 3px;
+    color: rgb(98, 96, 96);
+    font-size: 14px;
+}
+
+.ourteam {
+  position: relative;
+}
+
+.ourteam .container-md {
+  overflow: hidden;
+}
+
+.ourteam .row {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.ourteam .row::-webkit-scrollbar {
+  display: none;
+}
+
+.ourteam .btn-team {
+  position: absolute;
+  top: 50%;
+  /* transform: translateY(0%); */
+  padding: 0;
+  width: 50px;
+  height: 50px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 100%;
+  font-size: 30px;
+  font-weight: 900;
+  outline: none;
+  cursor: pointer;
+  z-index: 1;
+}
+.ourteam .btn-team:hover{
+  background-color: rgb(220, 218, 58);
+  color: #000;
+}
+.ourteam #prevBtn {
+  left: 35px;
+}
+
+.ourteam #nextBtn {
+  right: 35px;
+}
+
+  

@@ -1,0 +1,166 @@
+
+{% extends 'artistbase.html'%}
+{% block style %}<link rel="stylesheet" href="../static/css/my_music.css"> {% endblock %}
+
+{% block main %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3" style="border-bottom: 2px solid #3330303e;">
+  <div class="d-flex">
+    <div>
+      <h4 class="text-uppercase" style="font-weight: 900;color:#060707;">My Music <span class="pl-1" style="font-size: 30px;"></span> </h4>
+    </div>
+    <div>
+      <form method="post" class="sort-form">
+        {% csrf_token %}
+        <select name="sort_option" id="sort_option" class="px-2 py-2 ml-3">
+            <option value="" selected disabled>------ Sort By ------</option>
+            <option value="last_added" {% if sort_option == 'last_added' %}selected{% endif %}>Last Added</option>
+            <option value="category" {% if sort_option == 'category' %}selected{% endif %}>Category</option>
+            <option value="alphabetical" {% if sort_option == 'alphabetical' %}selected{% endif %}>Alphabetical</option>
+            <option value="random" {% if sort_option == 'random' %}selected{% endif %}>Random</option>
+        </select>
+        <button class="px-2 py-2 rounded btn-dark ml-2" type="submit">Sort</button>
+    </form>
+    </div>
+    <div>
+      <form method="post" class="music-search-form">
+        {% csrf_token %}
+        <input class="px-2 py-2 ml-3" type="text" name="search_query" placeholder="Search Music By Name">
+        <button name="search_button"  class="px-2 py-2 rounded btn-dark ml-2" type="submit">Search</button>
+      </form>    
+    </div>
+  </div>
+  <a href="{% url 'uploadMusic' %}" style="font-size: 16px;" class="btn btn-dark">+ Add Music</a>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    {% if messages %}
+    <div class="messages alert alert-success">
+        {% for message in messages %}
+        <div style="font-weight: 700;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <!-- Music items table -->
+    {% if music_list %}
+    <table class="table table-bordered" style="background-color: #fff;">
+        <thead>
+          <tr style="background-color: #f9f9608e;">
+            <th scope="col">#</th>
+            <th scope="col">Music Name</th>
+            <th scope="col">Singer Name</th>
+            <th scope="col">Music Catagory</th>
+            <th scope="col">Music Profile</th>
+            <th scope="col">Music Audio</th>
+            <th scope="col"> Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for m in music_list %}
+          <tr>
+            <th scope="row">{{ forloop.counter|truncatechars:15 }}</th>
+            <td>{{ m.songTitle|truncatechars:15 }}</td>
+            <td>{{ m.singer|truncatechars:15 }}</td>
+            <td>{{ m.category|truncatechars:15 }}</td>
+            <td><a class="text-dark" href="{{ m.img.url }}" alt="music_profile">{{ m.img.name|truncatechars:15 }}</a></td>
+            <td><a class="text-dark" href="{{ m.audio_file.url }}">{{ m.audio_file.name|truncatechars:15 }}</a></td>
+            <td style="display: flex;align-items: center; gap: 20px;">
+                <button type="button"  class="btn-success w-50" data-toggle="modal" data-target="#editModal{{ m.id }}">Edit</button>
+                <button type="button" class="delete-button btn-danger w-50" data-toggle="modal" data-target="#deleteModal{{ m.id }}">Delete</button>
+            </td>
+          </tr>
+          <!-- Modal for Delete -->
+          <div class="modal fade" id="deleteModal{{ m.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ m.id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel{{ m.id }}">Delete Music</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this music?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <form method="post" class="delete-form">
+                          {% csrf_token %}
+                          <input type="hidden" name="music_id" value="{{ m.id }}">
+                          <button type="submit" name="delete_button" class="btn btn-danger">Delete</button>
+                      </form>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <!-- Modal for Edit Form -->
+          <div class="modal fade" id="editModal{{ m.id }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel{{ m.id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="editModalLabel{{ m.id }}">Edit Music</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <!-- Add your form fields here for editing the music item -->
+                  <form method="post" class="edit-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="music_id" value="{{ m.id }}">
+                    <div class="form-group">
+                      <label for="updated_title">Title</label>
+                      <input type="text" class="form-control" id="updated_title" name="updated_title" value="{{ m.songTitle }}">
+                    </div>
+                    <div class="form-group">
+                      <label for="updated_singer">Singer</label>
+                      <input type="text" class="form-control" id="updated_singer" name="updated_singer" value="{{ m.singer }}">
+                    </div>
+                    <div class="form-group">
+                      <label for="updated_category">Category</label>
+                      <select class="form-control" id="updated_category" name="updated_category">
+                        {% for choice in m.CATEGORY_CHOICES %}
+                          <option value="{{ choice.0 }}" {% if choice.0 == m.category %}selected{% endif %}>{{ choice.1 }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="updated_img">Image</label>
+                      <input type="file" class="form-control-file" id="updated_img" name="updated_img">
+                      {% if m.audio_file %}
+                      <span class="text-black-50">Current Image: <a href="{{ m.img.url }}">{{ m.img.name }}</a></span>
+                      {% else %}
+                        <span>No Image file uploaded.</span>
+                      {% endif %}
+                    </div>
+                    <div class="form-group">
+                      <label for="updated_audio">Audio</label>
+                      <input type="file" class="form-control-file" id="updated_audio" name="updated_audio">
+                      {% if m.audio_file %}
+                      <span class="text-black-50">Current Audio: <a href="{{ m.audio_file.url }}">{{ m.audio_file.name }}</a></span>
+                      {% else %}
+                        <span>No audio file uploaded.</span>
+                      {% endif %}
+
+                    </div>
+                    <button type="submit" name="edit_button" class="btn btn-success w-50">Update</button>
+                    <button type="button" class="btn btn-secondary ml-4" data-dismiss="modal">Cancel</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <div>
+        <h3 class="text-center mt-2">No Music has been uploaded yet! <a href="{% url 'uploadMusic'%}">Upload Music</a></h3>
+        <img src="../static/images/no-music.png" alt="no-music" style="width: 100%; height: 500px;object-fit: contain;object-position: center;">
+      </div>
+
+      {% endif %}
+ 
+  </div>
+</div>
+
+{% endblock%}

@@ -1,0 +1,86 @@
+.about{
+    margin-top: 100px;
+    margin-bottom: 100px;
+    min-height: 60vh;
+}
+.title {
+    position: relative;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  
+  .title::before {
+    content: "";
+    height: 60px;
+    width: 15px;
+    border-radius: 10px;
+    background: #000;
+    display: inline-block;
+    margin-right: 1rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .title span {
+    display: inline-block; /* make the title a block-level element */
+    margin-left: 2rem; /* add margin to the left of the title */
+  }
+  
+  
+.about p{
+    line-height: 40px;
+    font-size: 14px;
+}
+#about-content p{
+    padding-right: 100px;
+}
+.carousel-item img{
+    border-radius: 10px;
+}
+.carousel-indicators {
+    bottom:-50px ;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .carousel-indicators li {
+    width: 25px;
+    height: 20px;
+    margin: 0 5px;
+    background-color: #e00909;
+  }
+  
+  .carousel-indicators li.active {
+    background-color: #020101;
+  }
+  
+/* ? */
+.carousel-button {
+    position: absolute;
+    background-color: #000;
+    padding-left: 9px;
+    padding-right: 9px;
+    top: 35%;
+  }
+.carousel-button .icon {
+    font-size: 32px; /* Adjust this value to change the size of the icon */
+    color: white; /* Adjust this value to change the color of the icon */
+  }
+  
+
+  @media(max-width:700px) {
+    .about{
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .carousel-button {
+      display: none;
+    }
+    #about-content p{
+      padding-right: 10px;
+  }
+ 
+    
+  }
+

@@ -1,0 +1,62 @@
+
+{% extends 'artistbase.html'%}
+{% block style %}<link rel="stylesheet" href="../static/css/upload_music.css"> {% endblock %}
+{% block main %}
+<div class="container">
+   <div class="row mt-3">
+    <div class="col-md-7 px-md-5 pb-md-5 pt-md-3" style="background-color: #fff; border-radius: 5px;">
+  <h3 class="mb-3" style="font-weight: 700;">Upload Music</h3>
+  {% if messages %}
+  <div class="alert alert-danger">
+      {% for message in messages %}
+      <div  {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+      {% endfor %}
+  </div>
+  {% endif %}
+  
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="songTitle">Song Title:</label>
+      <input type="text" class="form-control" id="songTitle" name="songTitle" maxlength="225" pattern="[a-zA-Z\s]+" title="Please enter text only" required>
+    </div>
+    <div class="form-group">
+      <label for="singer">Singer Name:</label>
+      <input type="text" class="form-control" id="singer" name="singer" maxlength="335" pattern="[a-zA-Z\s]+" title="Please enter text only" required>
+    </div>
+    <div class="form-group">
+      <label for="img">Music Thumbnail:</label>
+      <input type="file" class="form-control-file form-control" id="img" name="img" accept="image/*" style="height: 45px;" required>
+    </div>
+    <div class="form-group">
+      <label for="audio_file">Audio File:</label>
+      <input type="file" class="form-control-file form-control" id="audio_file" name="audio_file" accept="audio/*" style="height: 45px;" required>
+    </div>
+    <div class="form-group">
+      <label for="category">Song Category:</label>
+      <select class="form-control" id="category" name="category">
+        <option value="">Select Music Catagory</option>
+        <option value="happy">Happy 😁</option>
+        <option value="sad">Sad 😟</option>
+        <option value="disgust">Disgust 🥸</option>
+        <option value="angry">Angry 😠</option>
+        <option value="surprise">Surprise 😮</option>
+        <option value="neutral">Neutral 😐</option>
+        <option value="fear">Fear 😨</option>
+      </select>
+    </div>
+    <div class="d-flex justify-content-center align-content-center mt-4">
+        <button type="submit" class="btn btn-dark w-50 upload-btn" style="border-radius: 100px;">Upload</button>
+    </div>
+    
+  </form>
+</div>
+<div class="col-md-5" style="background-color: #fff; border-radius: 5px;">
+    <img src="../static/images/Playlist-bro.png" alt="music-upload"
+    style="width: 100%; height: 100%; object-fit: cover;object-position: center;">
+</div>
+</div>
+</div>
+
+
+{% endblock%}

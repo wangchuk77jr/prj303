@@ -1,0 +1,176 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <!-- link to font-awesome CSS file -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- boostrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- custom -->
+    <link rel="stylesheet" href="{% static '../static/css/index.css' %}">
+    {% block css %} {% endblock %}
+    
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="icon" href="../static/Image/logoTitle.png"  type="image">
+  </head>
+  <body>
+    <div id="home"></div>
+    <!-- Navbar -->
+    <nav  class="navbar navbar-expand-lg navbar-light">
+      <div class="container-md px-md-5">
+        <a class="navbar-brand" href="#">
+          <img src="../static/Image/logo.png" width="100" height="62" class="d-inline-block align-top logo" alt="Placeholder logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex gap-3">
+            <li class="nav-item active">
+              <a class="nav-link" href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#feedback">Feedback</a>
+            </li>
+            <li class="nav-item">
+              <form class="d-flex" id="search" onclick="submitSearch()">
+                <div class="search">
+                  <input type="search" class="search__input" id="search-query" placeholder="Search Music Here!" disabled>
+                  <button class="search__button">
+                    <svg class="search__icon" aria-hidden="true" viewBox="0 0 24 24">
+                      <g>
+                        <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                      </g>
+                    </svg>
+                  </button>
+                </div>
+              </form>
+              
+              <script>
+                function submitSearch() {
+                  const query = document.getElementById('search-query').value;
+                  const url = `/music/search/?q=${query}`;
+                  window.location.href = url;
+                }
+                
+                const navItems = document.querySelectorAll('nav li');
+                navItems.forEach(item => {
+                  item.addEventListener('click', () => {
+                    navItems.forEach(item => {
+                      item.classList.remove('active');
+                    });
+                    item.classList.add('active');
+                  });
+                });
+              </script>
+              
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'login'%}" class="loign-btn btn btn-dark px-3 text-light text-center" style="background-color:#385A64;border-radius: 0;border: none; margin-left: 2px;" type="submit">Drop Music</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+   {% block body %}{% endblock %}
+   <a href="#" id="go-to-top" class="px-3 py-2"><i class="fas fa-arrow-up"></i></a>
+   <script>
+        $(window).scroll(function() {
+        if ($(this).scrollTop() > 200) {
+          $('#go-to-top').fadeIn();
+        } else {
+          $('#go-to-top').fadeOut();
+        }
+      });
+        $('#go-to-top').click(function(event) {
+          event.preventDefault();
+          $('html, body').animate({scrollTop: 0});
+        });
+   </script>
+   <!-- Footer -->
+  <section class="footer">
+    <footer>
+    <div class="container-lg px-md-5" style="min-height: 70vh;">
+      <div class="row py-5">
+            <div class="col-xl-4 col-md-4 col-sm-6 mb-3">
+                <h6 class=" text-capitilize pb-3">About</h6>
+                <p style="width: 70%;font-size: 14px;line-height: 2rem;">We empower people to find music that matches their emotions and
+                  facial expressions, creating a personalized and meaningful 
+                  listening experience.</p>
+            </div>
+            <div class="col-xl-4 col-md-4 col-sm-6 mb-3">
+                <h6 class="text-capitalize pb-3 ">Quick Links</h6>
+                <div class="d-flex flex-column flex-wrap gap-2">
+                    <div class="d-flex align-items-center">
+                        <span><ion-icon name="arrow-forward-outline"></ion-icon></span>
+                        <a href="{% url 'face-expression' %}"  class="ms-2">Recomend Music</a>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <span><ion-icon name="arrow-forward-outline"></ion-icon></span>
+                        <a href="https://soundcloud.com/"  class="ms-2">Sound Cloud</a>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <span><ion-icon name="arrow-forward-outline"></ion-icon></span>
+                        <a href="https://open.spotify.com/"  class="ms-2">Spotify</a>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <span><ion-icon name="arrow-forward-outline"></ion-icon></span>
+                        <a href="https://worldstardistro.com/"  class="ms-2">Worldstar</a>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <span><ion-icon name="arrow-forward-outline"></ion-icon></span>
+                        <a href="https://genius.com/"  class="ms-2">Genius</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-4 col-sm-6 mb-3">
+                <h6 class="text-capitalize pb-3">Have a question?</h6>
+                <div class="d-flex flex-column flex-wrap gap-2">
+                    <div class="d-flex align-items-center">
+                        <span><ion-icon name="location-sharp"></ion-icon></span>
+                      <span style="font-size: 14px;"  class="ms-2">Gyalposhing,Bhutan</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <span><ion-icon name="call" class="service-icon"></ion-icon></span>
+                            <a href="tel:+97517337528" class="ms-2">+975 17337538</a>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <span><ion-icon name="mail" class="service-icon " ></ion-icon></span>
+                        <a href="mailto:officialsonam.gcit@gmail.com" class="ms-2">mrbfe.ai@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-5">
+                <hr style="height: 2px;color: rgb(165, 164, 164);">
+                
+                <p class="text-center pt-3" style="font-size: 14px;">Copyright &copy; <span id="current-year"></span> | Emovibe Music | All Rights Reserved</p>
+                <script>
+                  var currentYear = new Date().getFullYear();
+                  document.getElementById('current-year').innerHTML = currentYear;
+                </script>
+            </div>
+        </div>
+    </div>
+    </footer>
+  </section>
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Emovoibe Music | Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="icon" href="../static/Image/logoTitle.png"  type="image">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sigmar&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    :root{
+        --primary-color :#fefe03;
+        --secondary-color:#00F6FF;
+        --helper-color:#FF4F5A;
+        --text-color:#00000;
+    }
+    html{
+    scroll-behavior: smooth;
+    position: relative;
+    }
+    body{
+        font-family: 'Poppins', sans-serif;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100vh;
+        background-image: url('https://cdn.pixabay.com/photo/2021/09/01/10/43/music-6591030_1280.jpg');
+        background-repeat:no-repeat;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        z-index: 2;
+    }
+    html::after{
+        content: '';
+        width: 100%;
+        height: 100%;
+        background-color: #fed0037a;
+        position: absolute;
+        top:0;
+        padding: 0;
+        margin: 0;
+    }
+
+    
+    .input-group-text {
+      cursor: pointer;
+    }
+    .card-header{
+        font-weight: 900;
+    }
+    .loginContainer{
+      border-radius: 2px;
+      background-color: #ffea007f;
+    }
+    input::placeholder{
+      color: #18181888 !important;
+      font-weight: 400 !important;
+    }
+    input{
+      color: #000000 !important;
+      font-weight: 500 !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="container pt-2">
+    <a href="{% url 'home'%}">
+      <img src="../static/images/logo.png" width="120" height="80" class="d-inline-block align-top logo" alt="logo">
+    </a>
+  </div>
+  <div class="container mt-1" id="loginForm">
+    <div class="row justify-content-center">
+      <div class="col-md-6 ">
+        <div class="card loginContainer">
+          <div class="card-header text-center text-uppercase" style="font-family: 'Sigmar', cursive; font-size: 22px;color: #000000;font-weight:100;border-top-left-radius: 2px;border-top-right-radius: 2px;">
+            Login To emovibe Music
+          </div>
+          <div class="card-body px-md-5 mx-md-5">
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-danger">
+                  {{message}}
+                </div>
+              {% endfor %}
+            {% endif %}
+      <!-- Login Form -->
+            <form action="" method="POST" onsubmit="submitForm(event)">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" autocomplete="off" required/>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-group">
+                  <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required/>
+                  <div class="input-group-append">
+                    <span class="input-group-text" onclick="togglePasswordVisibility('password')">
+                      <i id="passwordIcon" class="fa fa-eye-slash"></i>
+                    </span>                      
+                  </div>
+                </div>
+              </div>
+              <div class="w-100 text-right d-none">
+                <a href="" style="color: #00000080;" class="text-left">Forgot Password?</a>
+              </div>
+              <div class="form-group mt-4">
+                <button type="submit" class="btn btn-dark btn-block" style="border-radius: 100px;">Login</button>
+              </div>
+            </form>
+
+            <script>
+              function submitForm(event) {
+                event.preventDefault();  // Prevent the default form submission
+                var button = document.querySelector('.btn-block');
+                var form = event.target;
+
+                button.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
+                button.disabled = true;
+
+                // Simulate a delay of 3 seconds
+                setTimeout(function() {
+                  // Submit the form after the delay
+                  form.submit();
+                }, 3000);
+              }
+            </script>
+
+            <div class="form-group mt-3 mb-5 text-center">
+              Don't have an account? <a href="signup" style="color:#fb2e3c">Signup here!</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+        function togglePasswordVisibility(inputId) {
+        var passwordInput = document.getElementById(inputId);
+        var passwordIcon = document.getElementById(inputId + "Icon");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordIcon.classList.remove("fa-eye-slash");
+            passwordIcon.classList.add("fa-eye");
+        } else {
+            passwordInput.type = "password";
+            passwordIcon.classList.remove("fa-eye");
+            passwordIcon.classList.add("fa-eye-slash");
+        }
+        }
+  </script>
+
+  
+</body>
+</html>

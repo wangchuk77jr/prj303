@@ -1,0 +1,109 @@
+{% extends 'artistbase.html'%}
+{% block style %}
+<link rel="stylesheet" href="../static/css/ArtistHome.css">
+{% endblock %}
+
+{% block main %}
+<div class="pt-3 pb-2 mb-3" style="border-bottom: 2px dotted #383736;">
+    <h4 class="text-uppercase" style="font-weight: 500;color:#010101;">Profile Settings</h4>
+  </div>
+  <div>
+    <div class="row">
+        <div class="col-md-6 mt-3">
+            <div style="width: 100%; background-color: #fff;padding: 20px; height: 450px ;">
+                <form method="post">
+                    {% csrf_token %}
+                    <!-- New Username -->
+                    <h5 style="border-bottom: 2px solid rgb(7, 188, 16);padding-bottom: 4px; width: fit-content;">Update Username</h5>
+                    <div>
+                        <p for="id_new_username">Current Username: <span class="font-weight-bold">{{user.username}}</span></p>
+                    </div>
+                    <div>
+                        {% if user_error %}
+                        <p class="alert alert-danger">{{user_error}}</p>
+                        {% endif %}
+                        <label for="id_new_username">New Username:</label> <br/>
+                        <input style="width: 80%;" type="text" required name="new_username" id="id_new_username" class="form-control settingInput" autocomplete="off" maxlength="15" minlength="5">
+                    </div>
+                    <button name="update_user"  class="text-capitalize mt-3 px-3 py-2 change__button" type="submit">Update Username</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6 mt-3">
+            <div style="width: 100%; background-color: #fff;padding: 20px; min-height: 450px;">
+                <form method="POST">
+                    {% csrf_token %}
+                    <!-- Display any form errors -->
+                    {% if messages %}
+                      {% for message in messages %}
+                        <p{% if message.tags %} class="{{ message.tags }} messages alert-danger alert"{% endif %}>{{ message }}</p>
+                      {% endfor %}
+                    {% endif %}                  
+                    <h5 style="border-bottom: 2px solid rgb(7, 188, 16);padding-bottom: 4px; width: fit-content;">Update Password</h5>
+                    <p style="font-weight: 300;color: #010101a3;">It's a good idea to use a strong password that you dont use anywhere else. Your password should have at least 8 characters.</p>
+                    <!-- Old Password -->
+                    <div class="form-group">
+                      <label for="old_password">Old Password</label>
+                      <div class="input-group">
+                        <input type="password" name="old_password" id="old_password" class="form-control settingInput" required autocomplete="new-password">
+                        <div class="input-group-append" >
+                          <span class="input-group-text" style="background-color: yellow;">
+                            <i class="far fa-eye-slash" id="toggle_old_password" onclick="togglePassword('old_password', 'toggle_old_password')"></i>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- New Password -->
+                    <div class="form-group">
+                      <label for="new_password1">New Password</label>
+                      <div class="input-group">
+                        <input type="password" name="new_password1" id="new_password1" class="form-control settingInput" required>
+                        <div class="input-group-append">
+                          <span class="input-group-text" style="background-color: yellow;">
+                            <i class="far fa-eye-slash" id="toggle_new_password1" onclick="togglePassword('new_password1', 'toggle_new_password1')"></i>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Confirm New Password -->
+                    <div class="form-group">
+                      <label for="new_password2">Confirm New Password</label>
+                      <div class="input-group">
+                        <input type="password" name="new_password2" id="new_password2" class="form-control settingInput" required>
+                        <div class="input-group-append">
+                          <span class="input-group-text" style="background-color: yellow;">
+                            <i class="far fa-eye-slash" id="toggle_new_password2" onclick="togglePassword('new_password2', 'toggle_new_password2')"></i>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Submit Button -->
+                    <button type="submit" name="update_password" class="px-3 py-2 change__button">Change Password</button>
+                  </form>
+                  
+                  <script>
+                    function togglePassword(fieldId, toggleId) {
+                      var field = document.getElementById(fieldId);
+                      var toggleIcon = document.getElementById(toggleId);
+                      var fieldType = field.getAttribute('type');
+                      if (fieldType === 'password') {
+                        field.setAttribute('type', 'text');
+                        toggleIcon.classList.remove('far', 'fa-eye-slash');
+                        toggleIcon.classList.add('far', 'fa-eye');
+                      } else {
+                        field.setAttribute('type', 'password');
+                        toggleIcon.classList.remove('far', 'fa-eye');
+                        toggleIcon.classList.add('far', 'fa-eye-slash');
+                      }
+                    }
+                  </script>
+                  
+                  
+            </div>
+        </div>
+    </div>
+   
+   
+        
+  </div>
+{% endblock %}

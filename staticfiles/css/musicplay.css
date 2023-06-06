@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+body{
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(233, 234, 234);
+}
+.music-section{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: start;
+}
+.music-card {
+    width: 250px;
+    transition: all linear 0.3s;
+  }
+.music-card:hover{
+    transform: translateY(-5px);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+  
+  .music-card .card-img-top {
+    max-height: 145px;
+    object-fit:cover;
+    object-position: center;
+  }
+  .music-body{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: none;
+    background-color: rgb(249, 249, 223);
+  }
+      /* Style for loading screen */
+      .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        flex-direction: column;
+      }
+      .loader {
+        width: 150px;
+        height: 150px;
+        border-left: 10px solid #040403;
+        border-radius: 50%;
+        animation: right5231 0.9s linear infinite;
+      }
+
+      .loader::before,
+        .loader::after {
+        content: "";
+        width: 120px;
+        height: 120px;
+        display: block;
+        position: absolute;
+        top: calc(50% - 60px);
+        left: calc(50% - 60px);
+        border-right: 10px solid #000000;
+        border-radius: 50%;
+        animation: left036 0.9s linear infinite;
+      }
+
+      .loader::after {
+        width: 90px;
+        height: 90px;
+        top: calc(50% - 45px);
+        left: calc(50% - 45px);
+        border: 0;
+        border-top: 10px solid #221d1c;
+        animation: none;
+      }
+
+      @keyframes right5231 {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes left036 {
+        from {
+          transform: rotate(720deg);
+        }
+
+        to {
+          transform: rotate(0deg);
+        }
+      }
+  .loading-message {
+    font-size: 24px;
+    color: #000000;
+  }
+  
+  /* Style for main content */
+  .main-content {
+    display: none;
+  }
+
+/* Customize the scrollbar track */
+::-webkit-scrollbar {
+  width: 15px; /* width of the scrollbar */
+}
+
+/* Customize the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #101010; /* color of the thumb */
+  border-radius: 10px; /* roundness of the thumb */
+}
+
+/* Customize the scrollbar track on hover */
+::-webkit-scrollbar-track{
+  background-color: #effb00;
+  border: 2px solid #00000012;
+  border-radius: 10px;
+}

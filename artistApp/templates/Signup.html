@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Emovibe Music | Signup</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="icon" href="../static/Image/logoTitle.png"  type="image">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sigmar&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    :root{
+        --primary-color :#fefe03;
+        --secondary-color:#00F6FF;
+        --helper-color:#FF4F5A;
+        --text-color:#00000;
+    }
+    html{
+    scroll-behavior: smooth;
+    position: relative;
+    }
+    body{
+        font-family: 'Poppins', sans-serif;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100vh;
+        background-image: url('https://cdn.pixabay.com/photo/2021/09/01/10/43/music-6591030_1280.jpg');
+        background-repeat:no-repeat;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        z-index: 2;
+    }
+    html::after{
+        content: '';
+        width: 100%;
+        height: 100%;
+        background-color: #fed0037a;
+        position: absolute;
+        top:0;
+        padding: 0;
+        margin: 0;
+    }
+
+    .input-group-text {
+      cursor: pointer;
+    }
+    .card-header{
+        font-weight: 900;
+    }
+    .registerContainer{
+      border-radius: 2px;
+      background-color: #ffea0088;
+    }
+    input::placeholder{
+      color: #18181888 !important;
+      font-weight: 400 !important;
+    }
+    input{
+      color: #000000 !important;
+      font-weight: 500 !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="container pt-2 mb-0">
+    <a href="{% url 'home'%}">
+      <img src="../static/images/logo.png" width="120" height="80" class="d-inline-block align-top logo" alt="logo">
+    </a>
+  </div>
+  <div class="container mb-3 mt-0" id="signupForm">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card registerContainer">
+          <div class="card-header text-center text-uppercase" style="font-family: 'Sigmar', cursive; font-size: 22px;color: #000000;font-weight:100;border-top-left-radius: 2px;border-top-right-radius: 2px;">
+            Sign Up To emovibe Music
+          </div>
+          <div class="card-body px-md-5 mx-md-5">
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-danger">
+                  {{message}}
+                </div>
+              {% endfor %}
+            {% endif %} 
+            
+            <form method="POST" novalidate>
+              {% csrf_token %}
+                <div id="error-messages"></div>
+                <div class="form-group">
+                  <label for="name">Username</label>
+                  <input type="text" class="form-control" id="name" placeholder="Enter username" name="username" required>
+                </div>
+                <div id="error-messages"></div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <div class="input-group">
+                    <input type="password" class="form-control" id="newPassword" placeholder="Enter password" name="password" required>
+                    <div class="input-group-append">
+                      <span class="input-group-text" onclick="togglePasswordVisibility('newPassword')">
+                        <i id="newPasswordIcon" class="fa fa-eye-slash"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="confirmPassword">Confirm Password</label>
+                  <div class="input-group">
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password" name="confirmPassword" required onkeyup="checkPasswordMatch()">
+                    <div class="input-group-append">
+                      <span class="input-group-text" onclick="togglePasswordVisibility('confirmPassword')">
+                        <i id="confirmPasswordIcon" class="fa fa-eye-slash"></i>
+                      </span>
+                    </div>
+                  </div> 
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-dark btn-block mt-4 mb-4" style="border-radius: 100px;">Sign Up</button>
+                </div>
+                <div class="form-group text-center mb-4">
+                  Already have an account? <a href="login" style="color:#fb2e3c">Log In</a>
+                </div>
+            </form>              
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const form = document.querySelector('form');
+    const nameInput = document.querySelector('#name');
+    const emailInput = document.querySelector('#email');
+    const passwordInput = document.querySelector('#newPassword');
+    const confirmPasswordInput = document.querySelector('#confirmPassword');
+    const errorMessages = document.querySelector('#error-messages');
+  
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      let errors = [];
+  
+      // Validate username
+      if (nameInput.value.trim() === '') {
+        errors.push('Username is required.');
+        nameInput.classList.add('is-invalid');
+      } else {
+        nameInput.classList.remove('is-invalid');
+      }
+  
+      // Validate email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(emailInput.value)) {
+        errors.push('Email address is invalid.');
+        emailInput.classList.add('is-invalid');
+      } else {
+        emailInput.classList.remove('is-invalid');
+      }
+  
+      // Validate password
+      const passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*(),.?":{}|<>])[a-zA-Z0-9!@#$%^&*(),.?":{}|<>]{8,}$/;
+      if (!passwordRegex.test(passwordInput.value)) {
+        errors.push('Password must be at least 8 characters long and contain letters, numbers, and special characters.');
+        passwordInput.classList.add('is-invalid');
+      } else {
+        passwordInput.classList.remove('is-invalid');
+      }
+  
+      // Validate password confirmation
+      if (passwordInput.value !== confirmPasswordInput.value) {
+        errors.push('Passwords do not match.');
+        confirmPasswordInput.classList.add('is-invalid');
+      } else {
+        confirmPasswordInput.classList.remove('is-invalid');
+      }
+  
+      if (errors.length > 0) {
+        errorMessages.innerHTML = '<ul class="list-unstyled"><li>' + errors.join('</li><li>') + '</li></ul>';
+        errorMessages.classList.add('alert', 'alert-danger');
+      } else {
+        errorMessages.innerHTML = '';
+        errorMessages.classList.remove('alert', 'alert-danger');
+        form.submit();
+      }
+    });
+  </script>
+  
+  <script>
+    function togglePasswordVisibility(inputId) {
+    const passwordInput = document.getElementById(inputId);
+    const passwordIcon = document.getElementById(inputId + "Icon");
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        passwordIcon.classList.remove("fa-eye-slash");
+        passwordIcon.classList.add("fa-eye");
+    } else {
+        passwordInput.type = "password";
+        passwordIcon.classList.remove("fa-eye");
+        passwordIcon.classList.add("fa-eye-slash");
+    }
+    }
+
+
+  </script>
+</body>
+</html>
